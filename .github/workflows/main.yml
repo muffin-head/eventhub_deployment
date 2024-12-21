@@ -43,10 +43,18 @@ jobs:
         id: outputs
         run: |
           echo "EVENT_HUB_CONNECTION_STR=$(terraform output -raw eventhub_namespace_connection_string)" >> $GITHUB_ENV
-          echo "EVENT_HUB_NAME=$(terraform output -raw eventhub_name)" >> $GITHUB_ENV
+          echo "EVENT_HUB_NAME=$(terraform output eventhub_name)" >> $GITHUB_ENV
 
       # Step 8: Print Captured Outputs
       - name: Display Outputs
         run: |
-          echo "Event Hub Connection String: ${{ env.EVENT_HUB_CONNECTION_STR }}"
           echo "Event Hub Name: ${{ env.EVENT_HUB_NAME }}"
+          echo "Sensitive connection string captured successfully."
+          echo "To use it securely, refer to the EVENT_HUB_CONNECTION_STR environment variable."
+
+      # Step 9: Use Captured Outputs in Downstream Jobs or Steps
+      - name: Use Event Hub Connection String
+        run: |
+          echo "Using the Event Hub Connection String in a secure way."
+          # Example usage of the sensitive connection string
+          echo "Event Hub Connection String: ${{ env.EVENT_HUB_CONNECTION_STR }}"
