@@ -1,3 +1,8 @@
+# Configure the Azure Provider
+provider "azurerm" {
+  features {}
+}
+
 # Event Hub Namespace
 resource "azurerm_eventhub_namespace" "eh_namespace" {
   name                = "ehnamespace-terraform"
@@ -13,21 +18,23 @@ resource "azurerm_eventhub_namespace" "eh_namespace" {
 
 # Event Hub
 resource "azurerm_eventhub" "event_hub" {
-  name                = "eventhub-terraform"
-  namespace_name      = azurerm_eventhub_namespace.eh_namespace.name
-  resource_group_name = "rg-aks-acr-terraform"  # Replace with the existing resource group name
-  partition_count     = 2
-  message_retention   = 1
+  name          = "eventhub-terraform"
+  namespace_id  = azurerm_eventhub_namespace.eh_namespace.id  # Use namespace_id instead of resource_group_name
+  partition_count = 2
+  message_retention = 1
 
+  tags = {
+    environment = "dev"
+  }
 }
 
 # Shared Access Policy
 resource "azurerm_eventhub_namespace_authorization_rule" "eh_auth_rule" {
-  name                = "RootManageSharedAccessKey"
-  namespace_name      = azurerm_eventhub_namespace.eh_namespace.name
-  resource_group_name = "rg-aks-acr-terraform"  # Replace with the existing resource group name
-  listen              = true
-  send                = true
-  manage              = true
+  name           = "RootManageSharedAccessKey"
+  namespace_name = azurerm_eventhub_namespace.eh_namespace.name
+  resource_group_name = "rg-aks-acr-terraform"  # Keep as namespace_name requires resource_group_name
+  listen         = true
+  send           = true
+  manage         = true
 }
 
