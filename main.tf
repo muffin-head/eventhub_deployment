@@ -19,9 +19,6 @@ resource "azurerm_eventhub" "event_hub" {
   partition_count     = 2
   message_retention   = 1
 
-  tags = {
-    environment = "dev"
-  }
 }
 
 # Shared Access Policy
