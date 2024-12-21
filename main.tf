@@ -36,7 +36,3 @@ resource "azurerm_eventhub_namespace_authorization_rule" "eh_auth_rule" {
 
 
 
-# Output Event Hub Name
-output "eventhub_name" {
-  value = azurerm_eventhub.event_hub.name
-}
