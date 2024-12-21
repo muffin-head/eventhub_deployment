@@ -34,14 +34,3 @@ resource "azurerm_eventhub" "event_hub" {
     }
   }
 }
-
-# Shared Access Policy
-resource "azurerm_eventhub_namespace_authorization_rule" "eh_auth_rule" {
-  name                = "RootManageSharedAccessKey"
-  namespace_name      = azurerm_eventhub_namespace.eh_namespace.name
-  resource_group_name = "rg-datalake-terraform"
-  listen              = true
-  send                = true
-  manage              = true
-}
-
