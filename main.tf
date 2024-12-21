@@ -35,8 +35,7 @@ resource "azurerm_eventhub" "event_hub" {
   }
 }
 
-# Shared Access Policy (Imported Resource)
-# RootManageSharedAccessKey already exists in Azure and is imported into Terraform
+# Shared Access Policy
 resource "azurerm_eventhub_namespace_authorization_rule" "eh_auth_rule" {
   name                = "RootManageSharedAccessKey"
   namespace_name      = azurerm_eventhub_namespace.eh_namespace.name
@@ -44,8 +43,5 @@ resource "azurerm_eventhub_namespace_authorization_rule" "eh_auth_rule" {
   listen              = true
   send                = true
   manage              = true
-  lifecycle {
-    # Prevent Terraform from recreating this resource
-    prevent_destroy = true
-  }
 }
+
