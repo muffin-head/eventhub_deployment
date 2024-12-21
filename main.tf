@@ -34,10 +34,7 @@ resource "azurerm_eventhub_namespace_authorization_rule" "eh_auth_rule" {
   manage              = true
 }
 
-# Output Event Hub Connection String
-output "eventhub_namespace_connection_string" {
-  value = azurerm_eventhub_namespace_authorization_rule.eh_auth_rule.primary_connection_string
-}
+
 
 # Output Event Hub Name
 output "eventhub_name" {
