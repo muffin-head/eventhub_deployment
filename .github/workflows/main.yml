@@ -52,7 +52,6 @@ jobs:
           echo "Sensitive connection string captured successfully."
           echo "To use it securely, refer to the EVENT_HUB_CONNECTION_STR environment variable."
 
-      # Step 9: Use Captured Outputs in Downstream Jobs or Steps
       - name: Use Event Hub Connection String
         run: |
           echo "Using the Event Hub Connection String in a secure way."
