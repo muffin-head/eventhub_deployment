@@ -11,9 +11,6 @@ resource "azurerm_eventhub_namespace" "eh_namespace" {
   sku                 = "Standard"
   capacity            = 1
 
-  tags = {
-    environment = "dev"
-  }
 }
 
 # Event Hub
@@ -23,9 +20,6 @@ resource "azurerm_eventhub" "event_hub" {
   partition_count = 2
   message_retention = 1
 
-  tags = {
-    environment = "dev"
-  }
 }
 
 # Shared Access Policy
